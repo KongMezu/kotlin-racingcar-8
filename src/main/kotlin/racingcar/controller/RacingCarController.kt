@@ -1,12 +1,23 @@
 package racingcar.controller
 
-class RacingCarontroller {
-    fun run() {
-        println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)")
-        val carNames = readLine()?.split(",") ?: emptyList()
-        println("시도할 횟수는 몇 회인가요?")
-        val tryCount = readLine()?.toIntOrNull() ?: 0
+import racingcar.model.Race
+import racingcar.view.InputView
+import racingcar.view.OutputView
 
-        println("입력한 자동차: $carNames, 시도 횟수: $tryCount")
+class RacingController {
+    fun run() {
+        val names = InputView.readCarNames()
+        val tryCount = InputView.readTryCount()
+
+        val race = Race(names)
+
+        println("\n실행 결과")
+        repeat(tryCount) {
+            race.playRound()
+            OutputView.printRound(race.cars)
+        }
+
+        val winners = race.findWinners()
+        OutputView.printWinners(winners)
     }
 }
