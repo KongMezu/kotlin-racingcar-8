@@ -8,15 +8,16 @@ import org.junit.jupiter.api.Test
 class RaceTest {
 
     @Test
-    @DisplayName("Race 생성 시 자동차가 이름 수만큼 생성된다")
+    @DisplayName("자동차가 이름 수만큼 생성된다")
     fun raceInitialization_createsCarsCorrectly() {
         val race = Race(listOf("pobi", "woni", "jun"))
-        assertThat(race.cars).hasSize(3)
-        assertThat(race.cars.all { it.position == 0 }).isTrue()
+        assertThat(race.cars)
+            .hasSize(3)
+            .allSatisfy { car -> assertThat(car.position).isZero() }
     }
 
     @Test
-    @DisplayName("playRound 실행 시 모든 자동차가 이동 시도를 한다")
+    @DisplayName("모든 자동차가 이동 시도를 한다")
     fun playRound_shouldCallMoveForEachCar() {
         val race = Race(listOf("pobi", "woni"))
         val before = race.cars.map { it.position }
@@ -28,7 +29,7 @@ class RaceTest {
     }
 
     @Test
-    @DisplayName("findWinners는 가장 많이 이동한 자동차 이름을 반환한다")
+    @DisplayName("가장 많이 이동한 자동차 이름을 반환한다")
     fun findWinners_shouldReturnMaxPositionCars() {
         val race = Race(listOf("pobi", "woni", "jun"))
         race.cars[0].apply { repeat(3) { position++ } }
