@@ -4,7 +4,6 @@ import camp.nextstep.edu.missionutils.Randoms
 
 class Car(val name: String) {
     var position = 0
-        private set
 
     fun move() {
         val number = Randoms.pickNumberInRange(0, 9)
