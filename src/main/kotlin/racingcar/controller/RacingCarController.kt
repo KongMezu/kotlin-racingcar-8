@@ -4,7 +4,7 @@ import racingcar.model.Race
 import racingcar.view.InputView
 import racingcar.view.OutputView
 
-class RacingController {
+class RacingCarController {
     fun run() {
         val names = InputView.readCarNames()
         val tryCount = InputView.readTryCount()
